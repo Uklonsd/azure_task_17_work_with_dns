@@ -90,10 +90,10 @@ $vnet = Get-AzVirtualNetwork -Name $virtualNetworkName -ResourceGroupName $resou
 New-AzPrivateDnsVirtualNetworkLink -ResourceGroupName $resourceGroupName -ZoneName $privateDnsZoneName -Name "or-nottodo-link" -VirtualNetworkId $vnet.Id -EnableRegistration:$true
 
 Write-Host "Creating Private DNS Record Set ..."
-$Records = New-AzPrivateDnsRecordConfig -Cname "webserver.or.nottodo"
+$Records = New-AzPrivateDnsRecordConfig -Cname "webserver"
 New-AzPrivateDnsRecordSet -ResourceGroupName $resourceGroupName -ZoneName $privateDnsZoneName -Name "todo" -RecordType Cname -Ttl 3600 -PrivateDnsRecord $Records
 
 
-# Remove-AzPrivateDnsZone -ResourceGroupName $resourceGroupName -Name $privateDnsZoneName
-# Remove-AzPrivateDnsVirtualNetworkLink -ResourceGroupName $resourceGroupName -ZoneName $privateDnsZoneName -Name "or-nottodo-link"
-# Remove-AzPrivateDnsRecordSet -ResourceGroupName $resourceGroupName -ZoneName $privateDnsZoneName -Name "todo" -RecordType Cname
+Remove-AzPrivateDnsZone -ResourceGroupName $resourceGroupName -Name $privateDnsZoneName
+Remove-AzPrivateDnsVirtualNetworkLink -ResourceGroupName $resourceGroupName -ZoneName $privateDnsZoneName -Name "or-nottodo-link"
+Remove-AzPrivateDnsRecordSet -ResourceGroupName $resourceGroupName -ZoneName $privateDnsZoneName -Name "todo" -RecordType Cname
